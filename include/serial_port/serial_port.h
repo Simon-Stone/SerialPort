@@ -1,25 +1,32 @@
 #ifndef SERIAL_PORT_H_
 #define SERIAL_PORT_H_
 
-#include <string>
+#include "../src/interface.h"
+#include "types.h"
 
 namespace serial_port
 {
-	enum class Parity {kNone, kOdd, kEven};
-    enum class NumStopBits { kOne, kTwo };
-    struct Settings
+    class SerialPort
     {
-        std::string portName;
-        int baudRate{ 9600 };
-        Parity parity{ Parity::kNone };
-        NumStopBits numStopBits{ NumStopBits::kOne };
-        bool hardwareFlowControl{ false };
-        unsigned long timeout_s{ 0 };
-        unsigned long timeout_ms{ 0 };
+    public:
+        SerialPort();
+        ~SerialPort();
+
+        void Open();
+        void Close();
+        bool IsOpen();
+        const Settings& GetSettings() const;
+
+        unsigned long NumBytesAvailable();
+        void FlushBuffer() const;
+        unsigned long ReadData(char* data, unsigned long num_bytes);
+        unsigned long WriteData(const char* data, unsigned long num_bytes);
+
+    private:
+        Interface* sp_;
     };
+
 }
-
-
 
 
 #endif // !SERIAL_PORT_H

@@ -1,7 +1,9 @@
 #ifndef SERIAL_PORT_INTERFACE_H_
 #define SERIAL_PORT_INTERFACE_H_
 
-#include "serial_port/serial_port.h"
+#include <string>
+
+#include "serial_port/types.h"
 
 namespace serial_port
 {
@@ -31,20 +33,20 @@ namespace serial_port
         virtual ~Interface() = 0;
         
 
-        virtual bool Open() = 0;
+        virtual void Open() = 0;
         virtual void Close() = 0;
         virtual bool IsOpen() = 0;
         const Settings& GetSettings() const;
 
-        virtual int NumBytesAvailable() = 0;
-        virtual bool FlushBuffer() const = 0;
-        virtual int ReadData(char* data, int numBytes) = 0;
-        virtual int WriteData(const char* data, int numBytes) = 0;
+        virtual unsigned long NumBytesAvailable() = 0;
+        virtual void FlushBuffer() const = 0;
+        virtual unsigned long ReadData(char* data, unsigned long num_bytes) = 0;
+        virtual unsigned long WriteData(const char* data, unsigned long num_bytes) = 0;
 
         // **************************************************************************
         // **************************************************************************
 
-    private:
+    protected:
         Settings settings_;
     };
 

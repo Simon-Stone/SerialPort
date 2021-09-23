@@ -14,6 +14,12 @@ serial_port::Interface::Interface(const std::string& port_name, const int baud_r
 {
 }
 
+// A function body for the pure virtual destructor is still required!
+serial_port::Interface::~Interface()
+{
+	
+}
+
 const serial_port::Settings& serial_port::Interface::GetSettings() const
 {
     return settings_;
