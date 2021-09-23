@@ -7,13 +7,23 @@
 serial_port::SerialPort::SerialPort()
 {
 #if defined(_WIN32)
-	sp_ = new SerialPortWindows();
+	sp_.reset( new SerialPortWindows());
 #endif
 }
 
-serial_port::SerialPort::~SerialPort()
+serial_port::SerialPort::SerialPort(const Settings& settings)
 {
-	delete sp_;
+#if defined(_WIN32)
+	sp_.reset(new SerialPortWindows(settings));
+#endif
+}
+
+serial_port::SerialPort::SerialPort(const std::string& port_name, int baud_rate, Parity parity,
+	NumStopBits stop_bits, bool hardware_flow_control, unsigned long timeout_s, unsigned long timeout_ms)
+{
+#if defined(_WIN32)
+	sp_.reset(new SerialPortWindows(port_name, baud_rate, parity, stop_bits, hardware_flow_control, timeout_s));
+#endif
 }
 
 void serial_port::SerialPort::Open()

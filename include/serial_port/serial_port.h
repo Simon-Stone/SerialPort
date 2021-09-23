@@ -1,6 +1,8 @@
 #ifndef SERIAL_PORT_H_
 #define SERIAL_PORT_H_
 
+#include <memory>
+
 #include "../src/interface.h"
 #include "types.h"
 
@@ -10,7 +12,20 @@ namespace serial_port
     {
     public:
         SerialPort();
-        ~SerialPort();
+        SerialPort(const Settings& settings);
+        SerialPort(const std::string& port_name, int baud_rate,
+            Parity parity = Parity::kNone,
+            NumStopBits stop_bits = serial_port::NumStopBits::kOne,
+            bool hardware_flow_control = false,
+            unsigned long int timeout_s = 0, unsigned long int timeout_ms = 0);
+    	// Allow moving a serial port
+        SerialPort(SerialPort&&) = default;
+        SerialPort& operator=(SerialPort&& other) noexcept { this->sp_ = std::move(other.sp_); return *this; }
+
+        // Do not allow copying a serial port
+        SerialPort(const SerialPort&) = delete;
+        SerialPort& operator=(const SerialPort& other) = delete;
+        
 
         void Open();
         void Close();
@@ -21,9 +36,9 @@ namespace serial_port
         void FlushBuffer() const;
         unsigned long ReadData(char* data, unsigned long num_bytes);
         unsigned long WriteData(const char* data, unsigned long num_bytes);
-
+        
     private:
-        Interface* sp_;
+        std::unique_ptr<Interface> sp_;
     };
 
 }
