@@ -2,12 +2,18 @@
 
 #if defined(_WIN32)
 #include "serial_port_windows.h"
+#elif defined(__linux__)
+#include "serial_port_linux.h"
+#else
+#error Unknown platform!
 #endif
 
 serial_port::SerialPort::SerialPort()
 {
 #if defined(_WIN32)
 	sp_.reset( new SerialPortWindows());
+#elif defined (__linux__)
+	sp_.reset(new SerialPortLinux());
 #endif
 }
 
@@ -15,6 +21,8 @@ serial_port::SerialPort::SerialPort(const Settings& settings)
 {
 #if defined(_WIN32)
 	sp_.reset(new SerialPortWindows(settings));
+#elif defined (__linux__)
+	sp_.reset(new SerialPortLinux(settings));
 #endif
 }
 
@@ -23,6 +31,8 @@ serial_port::SerialPort::SerialPort(const std::string& port_name, int baud_rate,
 {
 #if defined(_WIN32)
 	sp_.reset(new SerialPortWindows(port_name, baud_rate, parity, stop_bits, hardware_flow_control, timeout_s));
+#elif defined (__linux__)
+		sp_.reset(new SerialPortLinux(port_name, baud_rate, parity, stop_bits, hardware_flow_control, timeout_s));
 #endif
 }
 
