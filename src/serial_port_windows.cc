@@ -1,3 +1,4 @@
+#if defined(_WIN32)
 #include "serial_port_windows.h"
 
 void serial_port::SerialPortWindows::Open()
@@ -194,3 +195,4 @@ unsigned long serial_port::SerialPortWindows::WriteData(const char* data, unsign
 	}
 }
 
+#endif // _WIN32

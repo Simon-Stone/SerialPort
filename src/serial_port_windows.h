@@ -1,4 +1,8 @@
 #ifndef SERIAL_PORT_WINDOWS_H_
+#define SERIAL_PORT_WINDOWS_H_
+
+#if defined(_WIN32)
+
 #include <serial_port/serial_port.h>
 
 #include "interface.h"
@@ -33,6 +37,8 @@ namespace serial_port
 
 	};
 }
+
+#endif // _WIN32
 
 #endif // !SERIAL_PORT_WINDOWS_H_
 
