@@ -124,23 +124,27 @@ void serial_port::SerialPortWindows::Open()
 		throw IoException("[SerialPortWindows::Open()] Error setting the timeouts.");
 	}
 
-	if (SetCommConfig(handle_, &comm_config_, sizeof(COMMCONFIG)))
+	if (SetCommConfig(handle_, &comm_config_, sizeof(COMMCONFIG)) == 0)
 	{
-		throw IoException("[SerialPortWindows::Open()] Error setting the port settings.");
+		throw IoException("[SerialPortWindows::Open()] Error setting the port settings! Error code: " + std::to_string(GetLastError()));
 	}
+
+	isOpen_ = true;
 }
 
 void serial_port::SerialPortWindows::Close()
 {
-	if (handle_ != INVALID_HANDLE_VALUE)
+	if (this->IsOpen())
 	{
 		CloseHandle(handle_);
+		handle_ = INVALID_HANDLE_VALUE;
+		isOpen_ = false;
 	}
 }
 
 bool serial_port::SerialPortWindows::IsOpen()
 {
-	return handle_ != INVALID_HANDLE_VALUE;
+	return isOpen_;
 }
 
 unsigned long serial_port::SerialPortWindows::NumBytesAvailable()

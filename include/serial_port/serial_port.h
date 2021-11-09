@@ -2,6 +2,7 @@
 #define SERIAL_PORT_H_
 
 #include <memory>
+#include <ostream>
 
 #include "../src/interface.h"
 #include "types.h"
@@ -38,7 +39,14 @@ namespace serial_port
         void FlushBuffer() const;
         unsigned long ReadData(char* data, unsigned long num_bytes);
         unsigned long WriteData(const char* data, unsigned long num_bytes);
-        
+
+        friend std::ostream& operator<<(std::ostream& os, const SerialPort& obj)
+        {
+            os << "Serial Port: " << std::endl;
+        	os << obj.sp_->GetSettings();
+            return os;
+        }
+
     private:
         std::unique_ptr<Interface> sp_;
     };

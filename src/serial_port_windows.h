@@ -34,7 +34,7 @@ namespace serial_port
 		HANDLE handle_{ INVALID_HANDLE_VALUE };
 		COMMCONFIG comm_config_;
 		COMMTIMEOUTS comm_timeouts_;
-
+		bool isOpen_{ false };
 	};
 }
 
