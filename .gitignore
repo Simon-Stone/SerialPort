@@ -349,3 +349,4 @@ MigrationBackup/
 # Ionide (cross platform F# VS Code tools) working folder
 .ionide/
 /out/build/x64-Debug
+/out/build/WSL-GCC-Debug
