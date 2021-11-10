@@ -1,4 +1,4 @@
-#include "Interface.h"
+#include "interface.h"
 
 
 serial_port::Interface::Interface(const serial_port::Settings& settings) : settings_(settings)

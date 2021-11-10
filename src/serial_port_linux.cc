@@ -15,7 +15,7 @@ void serial_port::SerialPortLinux::Open()
 
 	if (handle_ < 0)
 	{
-		printf("Error %i from open: %s\n", errno, std::strerror(errno));
+		throw IoException("[SerialPortWindows::Open()] Could not open serial port.");
 	}
 }
 

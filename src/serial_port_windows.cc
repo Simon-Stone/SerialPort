@@ -174,7 +174,7 @@ void serial_port::SerialPortWindows::FlushBuffer() const
 unsigned long serial_port::SerialPortWindows::ReadData(char* data, unsigned long num_bytes)
 {
 	unsigned long bytes_read;
-	ReadFile(handle_, static_cast<void*>(data), num_bytes, &bytes_read, nullptr);
+	ReadFile(handle_, data, num_bytes, &bytes_read, nullptr);
 
 	return bytes_read;
 }
@@ -197,6 +197,24 @@ unsigned long serial_port::SerialPortWindows::WriteData(const char* data, unsign
 	{
 		return 0;
 	}
+}
+
+std::string serial_port::SerialPortWindows::ReadString()
+{
+	char c{'a'};
+	std::string str;
+	while(c != '\n')
+	{
+		ReadData(&c, 1);
+		str.push_back(c);
+	}
+
+	return str;
+}
+
+unsigned long serial_port::SerialPortWindows::WriteString(const std::string& str)
+{
+	return WriteData(str.c_str(), static_cast<unsigned long>(str.size()));
 }
 
 #endif // _WIN32

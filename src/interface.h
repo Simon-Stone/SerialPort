@@ -40,8 +40,12 @@ namespace serial_port
 
         virtual unsigned long NumBytesAvailable() = 0;
         virtual void FlushBuffer() const = 0;
-        virtual unsigned long ReadData(char* data, unsigned long num_bytes) = 0;
-        virtual unsigned long WriteData(const char* data, unsigned long num_bytes) = 0;
+
+    	virtual unsigned long ReadData(char* data, unsigned long num_bytes) = 0;
+        virtual std::string ReadString() = 0;
+
+    	virtual unsigned long WriteData(const char* data, unsigned long num_bytes) = 0;
+        virtual unsigned long WriteString(const std::string& str) = 0;
 
         // **************************************************************************
         // **************************************************************************

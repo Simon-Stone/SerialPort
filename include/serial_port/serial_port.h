@@ -38,7 +38,9 @@ namespace serial_port
         unsigned long NumBytesAvailable();
         void FlushBuffer() const;
         unsigned long ReadData(char* data, unsigned long num_bytes);
+        std::string ReadString();
         unsigned long WriteData(const char* data, unsigned long num_bytes);
+        unsigned long WriteString(const std::string& str);
 
         friend std::ostream& operator<<(std::ostream& os, const SerialPort& obj)
         {

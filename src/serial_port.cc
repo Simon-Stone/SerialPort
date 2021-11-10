@@ -1,3 +1,4 @@
+#include "..\include\serial_port\serial_port.h"
 #include "serial_port/serial_port.h"
 
 #if defined(_WIN32)
@@ -71,7 +72,17 @@ unsigned long serial_port::SerialPort::ReadData(char* data, unsigned long num_by
 	return sp_->ReadData(data, num_bytes);
 }
 
+std::string serial_port::SerialPort::ReadString()
+{
+	return sp_->ReadString();
+}
+
 unsigned long serial_port::SerialPort::WriteData(const char* data, unsigned long num_bytes)
 {
 	return sp_->WriteData(data, num_bytes);
+}
+
+unsigned long serial_port::SerialPort::WriteString(const std::string& str)
+{
+	return sp_->WriteString(str);
 }
