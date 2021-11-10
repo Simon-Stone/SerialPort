@@ -17,12 +17,12 @@ constexpr auto input_port_name = "COM6";
 // Test the various ways to instantiate a serial port
 TEST(SerialPortTests, Instantiation)
 {
-	serial_port::SerialPort default_port;
+	const serial_port::SerialPort default_port;
 	EXPECT_EQ(default_port.GetSettings(), serial_port::Settings());
 
-	auto custom_settings = serial_port::Settings("COM2", 115200, serial_port::Parity::kNone,
+	const auto custom_settings = serial_port::Settings("COM2", 115200, serial_port::Parity::kNone,
 	                                             serial_port::NumStopBits::kTwo, false, 0, 10);
-	serial_port::SerialPort settings_port(custom_settings);
+	const serial_port::SerialPort settings_port(custom_settings);
 	EXPECT_EQ(settings_port.GetSettings(), custom_settings);
 }
 

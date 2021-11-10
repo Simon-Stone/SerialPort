@@ -1,4 +1,3 @@
-#include "..\include\serial_port\serial_port.h"
 #include "serial_port/serial_port.h"
 
 #if defined(_WIN32)

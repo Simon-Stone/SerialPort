@@ -49,5 +49,15 @@ unsigned long serial_port::SerialPortLinux::WriteData(const char* data, unsigned
 	return 0;
 }
 
+std::string serial_port::SerialPortLinux::ReadString()
+{
+	return std::string();
+}
+
+unsigned long serial_port::SerialPortLinux::WriteString(const std::string& str)
+{
+	return 0;
+}
+
 
 #endif // __linux__
