@@ -3,7 +3,9 @@
 
 #if defined(__linux__)
 
-#include <serial_port/serial_port.h>
+#include "termios.h"
+
+#include "serial_port/serial_port.h"
 #include "interface.h"
 
 namespace serial_port
@@ -33,6 +35,7 @@ namespace serial_port
 
 	private:
 		int handle_{ -1 };
+        struct termios tty_;
 	};
 }
 

@@ -6,8 +6,8 @@
 #include "serial_port/serial_port.h"
 
 #if defined (__linux__)
-#define output_port_name "/dev/ttyUSB0"
-#define input_port_name "/dev/ttyUSB1"
+#define output_port_name "/dev/pts/2"
+#define input_port_name "/dev/pts/1"
 #elif defined(_WIN32)
 constexpr auto output_port_name = "COM5";
 constexpr auto input_port_name = "COM6";
