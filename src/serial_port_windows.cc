@@ -1,6 +1,68 @@
 #if defined(_WIN32)
 #include "serial_port_windows.h"
 
+
+namespace
+{
+	unsigned get_baud_rate(unsigned long baud)
+	{
+		unsigned baud_rate{ 0 };
+		switch (baud)
+		{
+		case 110:
+			baud_rate = CBR_110;
+			break;
+		case 300:
+			baud_rate = CBR_300;
+			break;
+		case 600:
+			baud_rate = CBR_600;
+			break;
+		case 1200:
+			baud_rate = CBR_1200;
+			break;
+		case 2400:
+			baud_rate = CBR_2400;
+			break;
+		case 4800:
+			baud_rate = CBR_4800;
+			break;
+		case 9600:
+			baud_rate = CBR_9600;
+			break;
+		case 14400:
+			baud_rate = CBR_14400;
+			break;
+		case 19200:
+			baud_rate = CBR_19200;
+			break;
+		case 38400:
+			baud_rate = CBR_38400;
+			break;
+		case 56000:
+			baud_rate = CBR_56000;
+			break;
+		case 57600:
+			baud_rate = CBR_57600;
+			break;
+		case 115200:
+			baud_rate = CBR_115200;
+			break;
+		case 128000:
+			baud_rate = CBR_128000;
+			break;
+		case 256000:
+			baud_rate = CBR_256000;
+			break;
+		default:
+			// Invalid baud rate
+			throw serial_port::IoException("[SerialPortWindows::get_baud_rate()] Invalid baud rate requested.");
+		}
+
+		return baud_rate;
+	}
+}
+
 void serial_port::SerialPortWindows::Open()
 {
 	if (IsOpen())
@@ -39,34 +101,7 @@ void serial_port::SerialPortWindows::Open()
 	comm_config_.dcb.fAbortOnError = FALSE;
 	comm_config_.dcb.fNull = FALSE;
 
-	switch (settings_.baud_rate)
-	{
-	case 4800:
-		comm_config_.dcb.BaudRate = CBR_4800;
-		break;
-	case 9600:
-		comm_config_.dcb.BaudRate = CBR_9600;
-		break;
-	case 19200:
-		comm_config_.dcb.BaudRate = CBR_19200;
-		break;
-	case 38400:
-		comm_config_.dcb.BaudRate = CBR_38400;
-		break;
-	case 57600:
-		comm_config_.dcb.BaudRate = CBR_57600;
-		break;
-	case 115200:
-		comm_config_.dcb.BaudRate = CBR_115200;
-		break;
-	case 921600:
-		comm_config_.dcb.BaudRate = 921600;   // Must use literals for the value here.
-		break;
-	default:
-		// Invalid baud rate
-		Close();
-		throw IoException("[SerialPortWindows::Open()] Invalid baud rate requested.");
-	}
+	comm_config_.dcb.BaudRate = get_baud_rate(settings_.baud_rate);
 
 	comm_config_.dcb.ByteSize = 8;
 
