@@ -9,8 +9,8 @@
 #define output_port_name "/dev/pts/2"
 #define input_port_name "/dev/pts/1"
 #elif defined(_WIN32)
-constexpr auto output_port_name = "COM5";
-constexpr auto input_port_name = "COM6";
+constexpr auto output_port_name = "COM2";
+constexpr auto input_port_name = "COM3";
 #endif
 
 
@@ -93,4 +93,40 @@ TEST(SerialPortTests, ReadString)
 
 	const auto in_string = in_port.ReadString();
 	EXPECT_EQ(in_string, out_string);
+}
+
+TEST(SerialPortTests, NumBytesAvailable)
+{
+	serial_port::SerialPort out_port(output_port_name, 9600);
+	serial_port::SerialPort in_port(input_port_name, 9600);
+
+	const auto out_string = std::string("I am an STL string!\r\n");
+	out_port.Open();
+	in_port.Open();
+	const auto num_bytes_written = out_port.WriteString(out_string);
+
+	const auto num_bytes_available = in_port.NumBytesAvailable();
+
+	EXPECT_EQ(num_bytes_available, num_bytes_written);
+}
+
+TEST(SerialPortTests, FlushBuffer)
+{
+	serial_port::SerialPort out_port(output_port_name, 9600);
+	serial_port::SerialPort in_port(input_port_name, 9600);
+
+	const auto out_string = std::string("I am an STL string!\r\n");
+	out_port.Open();
+	in_port.Open();
+	const auto num_bytes_written = out_port.WriteString(out_string);
+
+	auto num_bytes_available = in_port.NumBytesAvailable();
+
+	EXPECT_EQ(num_bytes_available, num_bytes_written);
+
+	in_port.FlushBuffer();
+
+	num_bytes_available = in_port.NumBytesAvailable();
+	EXPECT_EQ(num_bytes_available, 0);
+
 }
