@@ -30,9 +30,6 @@ namespace serial_port
 		unsigned long ReadData(char* data, unsigned long num_bytes) override;
 		unsigned long WriteData(const char* data, unsigned long num_bytes) override;
 
-		std::string ReadString() override;
-		unsigned long WriteString(const std::string& str) override;
-
 	private:
 		int handle_{ -1 };
         struct termios tty_;

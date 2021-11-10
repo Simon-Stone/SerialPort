@@ -29,7 +29,7 @@ namespace serial_port
         Interface(const Interface&) = delete;
 
         // Destructor. Cannot call pure virtual methods in destructor so derived classes
-    	// must call their respective close() method in destructor themselves!
+    	// must call their respective Close() method in destructor themselves!
         virtual ~Interface() = 0;
         
 
@@ -42,10 +42,10 @@ namespace serial_port
         virtual void FlushBuffer() const = 0;
 
     	virtual unsigned long ReadData(char* data, unsigned long num_bytes) = 0;
-        virtual std::string ReadString() = 0;
+        virtual std::string ReadString();
 
     	virtual unsigned long WriteData(const char* data, unsigned long num_bytes) = 0;
-        virtual unsigned long WriteString(const std::string& str) = 0;
+        virtual unsigned long WriteString(const std::string& str);
 
         // **************************************************************************
         // **************************************************************************

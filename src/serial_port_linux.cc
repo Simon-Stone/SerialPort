@@ -209,23 +209,5 @@ unsigned long serial_port::SerialPortLinux::WriteData(const char* data, unsigned
 	return write(handle_, data, num_bytes);
 }
 
-std::string serial_port::SerialPortLinux::ReadString()
-{
-    char c{'a'};
-    std::string str;
-    while(c != '\n')
-    {
-        ReadData(&c, 1);
-        str.push_back(c);
-    }
-
-    return str;
-}
-
-unsigned long serial_port::SerialPortLinux::WriteString(const std::string& str)
-{
-	return WriteData(str.c_str(), static_cast<unsigned long>(str.size()));
-}
-
 
 #endif // __linux__

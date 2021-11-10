@@ -24,3 +24,21 @@ const serial_port::Settings& serial_port::Interface::GetSettings() const
 {
     return settings_;
 }
+
+std::string serial_port::Interface::ReadString()
+{
+	char c{ 'a' };
+	std::string str;
+	while (c != '\n')
+	{
+		ReadData(&c, 1);
+		str.push_back(c);
+	}
+
+	return str;
+}
+
+unsigned long serial_port::Interface::WriteString(const std::string& str)
+{
+	return WriteData(str.c_str(), static_cast<unsigned long>(str.size()));
+}

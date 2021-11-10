@@ -30,9 +30,6 @@ namespace serial_port
 		unsigned long ReadData(char* data, unsigned long num_bytes) override;
 		unsigned long WriteData(const char* data, unsigned long num_bytes) override;
 
-		std::string ReadString() override;
-		unsigned long WriteString(const std::string& str) override;
-
 	private:
 		HANDLE handle_{ INVALID_HANDLE_VALUE };
 		COMMCONFIG comm_config_;

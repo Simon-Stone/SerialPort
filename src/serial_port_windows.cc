@@ -199,22 +199,5 @@ unsigned long serial_port::SerialPortWindows::WriteData(const char* data, unsign
 	}
 }
 
-std::string serial_port::SerialPortWindows::ReadString()
-{
-	char c{'a'};
-	std::string str;
-	while(c != '\n')
-	{
-		ReadData(&c, 1);
-		str.push_back(c);
-	}
-
-	return str;
-}
-
-unsigned long serial_port::SerialPortWindows::WriteString(const std::string& str)
-{
-	return WriteData(str.c_str(), static_cast<unsigned long>(str.size()));
-}
 
 #endif // _WIN32
