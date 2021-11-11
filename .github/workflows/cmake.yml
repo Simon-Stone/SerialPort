@@ -47,4 +47,4 @@ jobs:
       run: ctest -C ${{env.BUILD_TYPE}}
     
     - name: Teardown virtual serial ports
-      run: pkill socat
+      run: sudo pkill socat
