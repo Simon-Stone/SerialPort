@@ -1,5 +1,5 @@
 # SerialPort
-A light-weight library for cross-platform serial communication.
+A light-weight C++ library for cross-platform serial communication.
 
 ## Build instructions
 The build instructions are the same for both Windows (tested on Windows 10) and Linux (tested on Ubuntu 20.04):
