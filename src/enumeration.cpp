@@ -10,14 +10,14 @@ namespace
 		std::string value;
 		value.clear();
 
-		// Query only the length of the string at first
-		ULONG string_length = 0;
-		const LSTATUS status = key.QueryStringValue(name, nullptr, &string_length);
-		if (status != ERROR_SUCCESS)
-		{
-			SetLastError(status);
-			return {};
-		}
+    // Query only the length of the string at first
+    ULONG string_length = 0;
+    const LSTATUS status = key.QueryStringValue(name, nullptr, &string_length);
+    if (status != ERROR_SUCCESS)
+    {
+        SetLastError(status);
+        return {};
+    }
 
 		// Allocate space and then get the actual string
 		value.resize(string_length);
@@ -50,7 +50,7 @@ std::vector<serial_port::PortInfo> Enumeration::enumerate_from_registry()
 		return {};
 	}
 
-	max_value_name_len += 1; // Reserve one more for the \0 terminator
+		max_value_name_len += 1; // Reserve one more for the \0 terminator
 
 	std::string device_name;
 	device_name.resize(max_value_name_len);
