@@ -68,8 +68,10 @@ TEST(SerialPortTests, ReadData)
 	const auto num_bytes = static_cast<unsigned long>(strlen(test_c_string));
 	out_port.Open();
 	in_port.Open();
-    // Get rid of possible lingering data from previous tests
-    in_port.FlushBuffer();
+	// Get rid of possible lingering data from previous tests
+	out_port.FlushBuffer();
+	in_port.FlushBuffer();
+	
 
 	out_port.WriteData(test_c_string, num_bytes);
 
