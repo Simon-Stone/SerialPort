@@ -3,6 +3,6 @@
 
 touch virtual_port_1
 touch virtual_port_2
-socat pty,link=virtual_port_1,raw,echo=0 pty,link=virtual_port_2,raw,echo=0
+socat pty,link=virtual_port_1,raw,echo=0 pty,link=virtual_port_2,raw,echo=0 &
 
 
