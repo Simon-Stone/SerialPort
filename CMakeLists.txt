@@ -28,7 +28,8 @@ add_library(SerialPort STATIC
 
 target_include_directories (SerialPort PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
 
-enable_testing()
+# Because we need serial ports for testing, testing should be disabled in the repo and only enabled locally
+# enable_testing()
 
 add_executable(
   "serial_port_tests"
