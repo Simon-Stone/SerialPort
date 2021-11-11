@@ -8,8 +8,8 @@
 #include "serial_port/serial_port.h"
 
 #if defined (__linux__)
-#define output_port_name "/dev/pts/2"
-#define input_port_name "/dev/pts/3"
+#define output_port_name "/dev/pts/1"
+#define input_port_name "/dev/pts/2"
 #elif defined(_WIN32)
 constexpr auto output_port_name = "COM2";
 constexpr auto input_port_name = "COM3";

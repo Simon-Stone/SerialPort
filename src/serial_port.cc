@@ -43,7 +43,7 @@ std::vector<serial_port::PortInfo> serial_port::SerialPort::EnumeratePorts()
 #if defined(_WIN32)
 	return Enumeration::enumerate_from_registry();
 #elif defined(__linux__)
-	return {};
+	return Enumeration::get_available_ports();
 #endif
 }
 
