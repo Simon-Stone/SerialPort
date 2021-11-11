@@ -2,8 +2,7 @@ cmake_minimum_required(VERSION 3.14)
 
 project( SerialPort )
 
-# GoogleTest requires at least C++11
-set(CMAKE_CXX_STANDARD 11)
+set(CMAKE_CXX_STANDARD 17)
 
 include(FetchContent)
 FetchContent_Declare(
@@ -22,7 +21,7 @@ add_library(SerialPort STATIC
 "src/interface.cc" "src/interface.h"
 "src/serial_port_windows.cc" "src/serial_port_windows.h" 
 "src/serial_port_linux.cc" "src/serial_port_linux.h"
-"include/serial_port/types.h")
+"include/serial_port/types.h" "src/enumeration.h" "src/enumeration.cpp")
 
 target_include_directories (SerialPort PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
 
@@ -31,7 +30,7 @@ enable_testing()
 add_executable(
   "serial_port_tests"
   "test/tests.cc"
-)
+ "src/enumeration.h" "src/enumeration.cpp")
 
 target_link_libraries(
   serial_port_tests

@@ -3,6 +3,8 @@
 
 #include <memory>
 #include <ostream>
+#include <vector>
+#include <string>
 
 #include "../src/interface.h"
 #include "types.h"
@@ -29,6 +31,8 @@ namespace serial_port
         SerialPort(const SerialPort&) = delete;
         SerialPort& operator=(const SerialPort& other) = delete;
         
+
+        static std::vector<PortInfo> EnumeratePorts();
 
         void Open();
         void Close();
