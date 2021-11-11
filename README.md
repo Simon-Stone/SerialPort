@@ -44,6 +44,8 @@ The class interface is currently undocumented but hopefully self-explanatory. He
 
 #include <serial_port/serial_port.h>
 
+using namespace serial_port;
+
 int main() 
 {
   // Instantiate two ports (Make sure these are available and connected to each other on your system)
