@@ -1,4 +1,5 @@
 #include "serial_port/serial_port.h"
+#include "enumeration.h"
 
 #if defined(_WIN32)
 #include "serial_port_windows.h"
@@ -7,6 +8,7 @@
 #else
 #error Unknown platform!
 #endif
+
 
 serial_port::SerialPort::SerialPort()
 {
@@ -33,6 +35,15 @@ serial_port::SerialPort::SerialPort(const std::string& port_name, int baud_rate,
 	sp_.reset(new SerialPortWindows(port_name, baud_rate, parity, stop_bits, hardware_flow_control, timeout_s));
 #elif defined (__linux__)
 		sp_.reset(new SerialPortLinux(port_name, baud_rate, parity, stop_bits, hardware_flow_control, timeout_s));
+#endif
+}
+
+std::vector<serial_port::PortInfo> serial_port::SerialPort::EnumeratePorts()
+{
+#if defined(_WIN32)
+	return Enumeration::enumerate_from_registry();
+#elif defined(__linux__)
+	return {};
 #endif
 }
 

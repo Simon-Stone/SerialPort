@@ -130,3 +130,14 @@ TEST(SerialPortTests, FlushBuffer)
 	EXPECT_EQ(num_bytes_available, 0);
 
 }
+
+TEST(SerialPortTests, Enumerate)
+{
+	const auto ports = serial_port::SerialPort::EnumeratePorts();
+	for (const auto& port : ports)
+	{
+		std::cout << port << std::endl;
+	}
+
+	// No way to check automatically if port names are correct or complete. But at least it is not throwing an error if this passes.
+}
