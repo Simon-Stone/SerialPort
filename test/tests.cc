@@ -2,12 +2,14 @@
 
 #include <cstring>
 #include <iostream>
+#include <chrono>
+#include <thread>
 
 #include "serial_port/serial_port.h"
 
 #if defined (__linux__)
 #define output_port_name "/dev/pts/2"
-#define input_port_name "/dev/pts/1"
+#define input_port_name "/dev/pts/3"
 #elif defined(_WIN32)
 constexpr auto output_port_name = "COM2";
 constexpr auto input_port_name = "COM3";
@@ -66,8 +68,13 @@ TEST(SerialPortTests, ReadData)
 	const auto num_bytes = static_cast<unsigned long>(strlen(test_c_string));
 	out_port.Open();
 	in_port.Open();
+    // Get rid of possible lingering data from previous tests
+    in_port.FlushBuffer();
 
 	out_port.WriteData(test_c_string, num_bytes);
+
+    // Allow some time for data transfer to take place
+    std::this_thread::sleep_for(std::chrono::milliseconds(20));
 
 	// Make Rx buffer one element larger to hold the terminating \0
 	char* buf = new char[num_bytes+1];
@@ -88,8 +95,13 @@ TEST(SerialPortTests, ReadString)
 	const auto out_string = std::string("I am an STL string!\r\n");
 	out_port.Open();
 	in_port.Open();
+    // Get rid of possible lingering data from previous tests
+    in_port.FlushBuffer();
 
 	out_port.WriteString(out_string);
+
+    // Allow some time for data transfer to take place
+    std::this_thread::sleep_for(std::chrono::milliseconds(20));
 
 	const auto in_string = in_port.ReadString();
 	EXPECT_EQ(in_string, out_string);
@@ -103,7 +115,13 @@ TEST(SerialPortTests, NumBytesAvailable)
 	const auto out_string = std::string("I am an STL string!\r\n");
 	out_port.Open();
 	in_port.Open();
+    // Get rid of possible lingering data from previous tests
+    in_port.FlushBuffer();
+
 	const auto num_bytes_written = out_port.WriteString(out_string);
+
+	// Allow some time for data transfer to take place
+	std::this_thread::sleep_for(std::chrono::milliseconds(20));
 
 	const auto num_bytes_available = in_port.NumBytesAvailable();
 
@@ -118,7 +136,14 @@ TEST(SerialPortTests, FlushBuffer)
 	const auto out_string = std::string("I am an STL string!\r\n");
 	out_port.Open();
 	in_port.Open();
-	const auto num_bytes_written = out_port.WriteString(out_string);
+
+	// Get rid of possible lingering data from previous tests
+    in_port.FlushBuffer();
+
+    const auto num_bytes_written = out_port.WriteString(out_string);
+
+    // Allow some time for data transfer to take place
+    std::this_thread::sleep_for(std::chrono::milliseconds(20));
 
 	auto num_bytes_available = in_port.NumBytesAvailable();
 

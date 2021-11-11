@@ -1,10 +1,11 @@
 #if defined(__linux__)
 
-#include <fcntl.h> // Contains file controls like O_RDWR
-#include <cerrno> // Error integer 
-#include <cstring> // strerror() function
-#include <termios.h> // Contains POSIX terminal control definitions
-#include <unistd.h> // write(), read(), close()
+#include <fcntl.h>
+#include <cerrno>
+#include <cstring>
+#include <termios.h>
+#include <unistd.h>
+#include <sys/ioctl.h>
 
 #include "serial_port_linux.h"
 
@@ -192,11 +193,15 @@ bool serial_port::SerialPortLinux::IsOpen()
 
 unsigned long serial_port::SerialPortLinux::NumBytesAvailable()
 {
-	return 0;
+    unsigned long num_bytes_available{0};
+    ioctl(handle_, FIONREAD, &num_bytes_available);
+
+    return num_bytes_available;
 }
 
 void serial_port::SerialPortLinux::FlushBuffer() const
 {
+    tcflush(handle_, TCIOFLUSH);
 }
 
 unsigned long serial_port::SerialPortLinux::ReadData(char* data, unsigned long num_bytes)
