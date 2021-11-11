@@ -8,8 +8,8 @@
 #include "serial_port/serial_port.h"
 
 #if defined (__linux__)
-#define output_port_name "/dev/pts/1"
-#define input_port_name "/dev/pts/2"
+#define output_port_name "/dev/pts/0"
+#define input_port_name "/dev/pts/1"
 #elif defined(_WIN32)
 constexpr auto output_port_name = "COM2";
 constexpr auto input_port_name = "COM3";
@@ -61,20 +61,20 @@ TEST(SerialPortTests, WriteString)
 // Test reading a C string
 TEST(SerialPortTests, ReadData)
 {
-	serial_port::SerialPort out_port(output_port_name, 115200);
-	serial_port::SerialPort in_port(input_port_name, 115200);
+	serial_port::SerialPort out_port(output_port_name, 9600);
+	serial_port::SerialPort in_port(input_port_name, 9600);
 
 	constexpr auto test_c_string = "I am a C string!\r\n";
 	const auto num_bytes = static_cast<unsigned long>(strlen(test_c_string));
 	out_port.Open();
 	in_port.Open();
-    // Get rid of possible lingering data from previous tests
-    in_port.FlushBuffer();
+	// Get rid of possible lingering data from previous tests
+	in_port.FlushBuffer();
 
 	out_port.WriteData(test_c_string, num_bytes);
 
     // Allow some time for data transfer to take place
-    std::this_thread::sleep_for(std::chrono::milliseconds(20));
+    std::this_thread::sleep_for(std::chrono::milliseconds(100));
 
 	// Make Rx buffer one element larger to hold the terminating \0
 	char* buf = new char[num_bytes+1];
