@@ -1,2 +1,2 @@
 # SerialPort
-A class for cross-platform serial communication
+A light-weight library for cross-platform serial communication.
