@@ -38,14 +38,16 @@ To use the `SerialPort` in your own project, add the folder `SerialPort/include`
 The class interface is currently undocumented but hopefully self-explanatory. Here is a minimal example to get you started:
 
 ```cpp
+#include <chrono>
 #include <iostream>
+#include <thread>
+
 #include <serial_port/serial_port.h>
 
-using namespace serial_port;
-
-int main(int argc, char** argv) 
+int main() 
 {
   // Instantiate two ports (Make sure these are available and connected to each other on your system)
+  // Otherwise exceptions will be thrown!
   SerialPort out_port("COM1", 9600);  // Use appropriate name on Linux, e.g., /dev/ttyS0
   SerialPort in_port("COM2", 9600);  // Use appropriate name on Linux, e.g., /dev/ttyS1
   
