@@ -1,5 +1,5 @@
-#ifndef SERIAL_PORT_INTERFACE_H_
-#define SERIAL_PORT_INTERFACE_H_
+#ifndef SERIAL_PORT_INTERFACE_H
+#define SERIAL_PORT_INTERFACE_H
 
 #include <string>
 
@@ -17,7 +17,7 @@ namespace serial_port
     public:
         // Constructors
         Interface() = default;
-        Interface(const Settings& settings);
+        explicit Interface(const Settings& settings);
         Interface(const std::string& port_name, int baud_rate,
             Parity parity = Parity::kNone,
             NumStopBits stop_bits = serial_port::NumStopBits::kOne,
@@ -25,8 +25,10 @@ namespace serial_port
             unsigned long int timeout_s = 0, unsigned long int timeout_ms = 0);
         // Allow moving a serial port
         Interface(Interface&&) = default;
+        Interface& operator=(Interface&& other) = default;
         // Do not allow copying a serial port
         Interface(const Interface&) = delete;
+        Interface& operator=(const Interface& other) = delete;
 
         // Destructor. Cannot call pure virtual methods in destructor so derived classes
     	// must call their respective Close() method in destructor themselves!
@@ -36,7 +38,7 @@ namespace serial_port
         virtual void Open() = 0;
         virtual void Close() = 0;
         virtual bool IsOpen() = 0;
-        const Settings& GetSettings() const;
+        [[nodiscard]] const Settings& GetSettings() const;
 
         virtual unsigned long NumBytesAvailable() = 0;
         virtual void FlushBuffer() const = 0;
@@ -56,4 +58,4 @@ namespace serial_port
 
 }
 
-#endif // !SERIAL_PORT_INTERFACE_H_
+#endif // !SERIAL_PORT_INTERFACE_H

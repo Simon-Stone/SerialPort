@@ -44,8 +44,12 @@ namespace serial_port
 	struct Settings
 	{
 		Settings() = default;
-		Settings(const std::string& port_name, int baud_rate, Parity parity, NumStopBits num_stop_bits, bool hardware_flow_control, unsigned long timeout_s, unsigned long timeout_ms) :
-			port_name(port_name), baud_rate(baud_rate), parity(parity), num_stop_bits(num_stop_bits), hardware_flow_control(hardware_flow_control), timeout_s(timeout_s), timeout_ms(timeout_ms) {}
+		Settings(const std::string& port_name, const int baud_rate, const Parity parity, const NumStopBits num_stop_bits,
+		         const bool hardware_flow_control, const unsigned long timeout_s, const unsigned long timeout_ms) :
+			port_name(port_name), baud_rate(baud_rate), parity(parity), num_stop_bits(num_stop_bits),
+			hardware_flow_control(hardware_flow_control), timeout_s(timeout_s), timeout_ms(timeout_ms)
+		{
+		}
 		std::string port_name{ kDefaultName };
 		int baud_rate{ 9600 };
 		Parity parity{ Parity::kNone };
@@ -72,23 +76,23 @@ namespace serial_port
 
 		friend std::ostream& operator<<(std::ostream& os, const Settings& obj)
 		{
-			std::string parity;
+			std::string parity_string;
 			switch (obj.parity)
 			{
 			case Parity::kNone:
-				parity = "none";
+				parity_string = "none";
 				break;
 			case Parity::kOdd:
-				parity = "odd";
+				parity_string = "odd";
 				break;
 			case Parity::kEven:
-				parity = "even";
+				parity_string = "even";
 				break;
 			}
 			return os
 				<< "Name: " << obj.port_name << std::endl
 				<< "Baud rate: " << obj.baud_rate << std::endl
-				<< "Parity: " << parity << std::endl
+				<< "Parity: " << parity_string << std::endl
 				<< "Number of stop bits: " << (obj.num_stop_bits == NumStopBits::kOne ? "one" : "two") << std::endl
 				<< "Hardware flow control: " << obj.hardware_flow_control << std::endl
 				<< "Timeout [s]: " << obj.timeout_s << std::endl

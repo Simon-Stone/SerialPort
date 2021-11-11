@@ -1,5 +1,5 @@
-#ifndef SERIAL_PORT_H_
-#define SERIAL_PORT_H_
+#ifndef SERIAL_PORT_H
+#define SERIAL_PORT_H
 
 #include <memory>
 #include <ostream>
@@ -15,7 +15,7 @@ namespace serial_port
     {
     public:
         SerialPort();
-        SerialPort(const Settings& settings);
+        explicit SerialPort(const Settings& settings);
         SerialPort(const std::string& port_name, int baud_rate,
             Parity parity = Parity::kNone,
             NumStopBits stop_bits = serial_port::NumStopBits::kOne,
@@ -34,17 +34,17 @@ namespace serial_port
 
         static std::vector<PortInfo> EnumeratePorts();
 
-        void Open();
-        void Close();
-        bool IsOpen();
-        const Settings& GetSettings() const;
+        void Open() const;
+        void Close() const;
+        [[nodiscard]] bool IsOpen() const;
+        [[nodiscard]] const Settings& GetSettings() const;
 
-        unsigned long NumBytesAvailable();
+        [[nodiscard]] unsigned long NumBytesAvailable() const;
         void FlushBuffer() const;
-        unsigned long ReadData(char* data, unsigned long num_bytes);
-        std::string ReadString();
-        unsigned long WriteData(const char* data, unsigned long num_bytes);
-        unsigned long WriteString(const std::string& str);
+        unsigned long ReadData(char* data, unsigned long num_bytes) const;
+        [[nodiscard]] std::string ReadString() const;
+        unsigned long WriteData(const char* data, unsigned long num_bytes) const;
+        unsigned long WriteString(const std::string& str) const;  // NOLINT(modernize-use-nodiscard)
 
         friend std::ostream& operator<<(std::ostream& os, const SerialPort& obj)
         {

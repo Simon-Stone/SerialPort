@@ -10,11 +10,18 @@
 
 namespace serial_port
 {
-	class SerialPortWindows : public Interface
+	class SerialPortWindows final : public Interface
 	{
 	public:
 		// Inherit the constructors from the interface
 		using Interface::Interface;
+
+		// Allow moving a serial port
+		SerialPortWindows(SerialPortWindows&&) = default;
+		SerialPortWindows& operator=(SerialPortWindows&& other) = default;
+		// Do not allow copying a serial port
+		SerialPortWindows(const SerialPortWindows&) = delete;
+		SerialPortWindows& operator=(const SerialPortWindows& other) = delete;
 
 		// Make sure the port gets properly closed on destruction
 		~SerialPortWindows() override { SerialPortWindows::Close(); }
@@ -33,8 +40,8 @@ namespace serial_port
 	private:
 		HANDLE handle_{ INVALID_HANDLE_VALUE };
 		COMMCONFIG comm_config_;
-		COMMTIMEOUTS comm_timeouts_;
-		bool isOpen_{ false };
+		// ReSharper disable once CommentTypo
+		// COMMTIMEOUTS comm_timeouts_;
 	};
 }
 

@@ -6,60 +6,42 @@ namespace
 {
 	unsigned get_baud_rate(unsigned long baud)
 	{
-		unsigned baud_rate{ 0 };
 		switch (baud)
 		{
 		case 110:
-			baud_rate = CBR_110;
-			break;
+			return CBR_110;
 		case 300:
-			baud_rate = CBR_300;
-			break;
+			return CBR_300;
 		case 600:
-			baud_rate = CBR_600;
-			break;
+			return CBR_600;
 		case 1200:
-			baud_rate = CBR_1200;
-			break;
+			return CBR_1200;
 		case 2400:
-			baud_rate = CBR_2400;
-			break;
+			return CBR_2400;
 		case 4800:
-			baud_rate = CBR_4800;
-			break;
+			return CBR_4800;
 		case 9600:
-			baud_rate = CBR_9600;
-			break;
+			return CBR_9600;
 		case 14400:
-			baud_rate = CBR_14400;
-			break;
+			return CBR_14400;
 		case 19200:
-			baud_rate = CBR_19200;
-			break;
+			return CBR_19200;
 		case 38400:
-			baud_rate = CBR_38400;
-			break;
+			return CBR_38400;
 		case 56000:
-			baud_rate = CBR_56000;
-			break;
+			return CBR_56000;
 		case 57600:
-			baud_rate = CBR_57600;
-			break;
+			return CBR_57600;
 		case 115200:
-			baud_rate = CBR_115200;
-			break;
+			return CBR_115200;
 		case 128000:
-			baud_rate = CBR_128000;
-			break;
+			return CBR_128000;
 		case 256000:
-			baud_rate = CBR_256000;
-			break;
+			return CBR_256000;
 		default:
 			// Invalid baud rate
 			throw serial_port::IoException("[SerialPortWindows::get_baud_rate()] Invalid baud rate requested.");
 		}
-
-		return baud_rate;
 	}
 }
 
@@ -85,9 +67,9 @@ void serial_port::SerialPortWindows::Open()
 	}
 
 	// Set the recommended queue size for buffering
-	const DWORD IN_QUEUE_SIZE = 32768;
-	const DWORD OUT_QUEUE_SIZE = 32768;
-	SetupComm(handle_, IN_QUEUE_SIZE, OUT_QUEUE_SIZE);
+	constexpr DWORD in_queue_size = 32768;
+	constexpr DWORD out_queue_size = 32768;
+	SetupComm(handle_, in_queue_size, out_queue_size);
 
 	// Prepare the settings structures
 	unsigned long conf_size = sizeof(COMMCONFIG);
@@ -146,13 +128,8 @@ void serial_port::SerialPortWindows::Open()
 	comm_config_.dcb.fInX = FALSE;
 	comm_config_.dcb.fOutX = FALSE;
 
-	COMMTIMEOUTS timeouts = { 0 };
-
-	timeouts.ReadIntervalTimeout = MAXDWORD;
-	timeouts.ReadTotalTimeoutConstant = 0;
-	timeouts.ReadTotalTimeoutMultiplier = 0;
-	timeouts.WriteTotalTimeoutConstant = 50;
-	timeouts.WriteTotalTimeoutMultiplier = 10;
+	// TODO: Use user-supplied timeouts!
+	COMMTIMEOUTS timeouts{MAXDWORD, 0, 0, 10, 50};
 
 	if (!SetCommTimeouts(handle_, &timeouts))
 	{
@@ -163,8 +140,6 @@ void serial_port::SerialPortWindows::Open()
 	{
 		throw IoException("[SerialPortWindows::Open()] Error setting the port settings! Error code: " + std::to_string(GetLastError()));
 	}
-
-	isOpen_ = true;
 }
 
 void serial_port::SerialPortWindows::Close()
@@ -173,13 +148,12 @@ void serial_port::SerialPortWindows::Close()
 	{
 		CloseHandle(handle_);
 		handle_ = INVALID_HANDLE_VALUE;
-		isOpen_ = false;
 	}
 }
 
 bool serial_port::SerialPortWindows::IsOpen()
 {
-	return isOpen_;
+	return handle_ != INVALID_HANDLE_VALUE;
 }
 
 unsigned long serial_port::SerialPortWindows::NumBytesAvailable()
