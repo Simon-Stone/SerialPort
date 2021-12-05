@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['open_0',['Open',['../classserial__port_1_1_serial_port.html#aab5ac68f9f1d6aec68e0af878eeb12f5',1,'serial_port::SerialPort']]],
-  ['operator_3c_3c_1',['operator&lt;&lt;',['../classserial__port_1_1_serial_port.html#adc6938818760eda9d7bbf742d2465634',1,'serial_port::SerialPort']]]
+  ['interface_0',['Interface',['../classserial__port_1_1_interface.html',1,'serial_port']]],
+  ['isopen_1',['IsOpen',['../classserial__port_1_1_serial_port.html#a87d5e6d46181b1bb25bf33243c6a6ce2',1,'serial_port::SerialPort']]]
 ];

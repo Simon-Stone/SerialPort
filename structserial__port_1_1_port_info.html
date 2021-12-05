@@ -75,29 +75,42 @@ $(function() {
   <div class="headertitle"><div class="title">serial_port::PortInfo Struct Reference</div></div>
 </div><!--header-->
 <div class="contents">
+
+<p>Holds information about a port.  
+ <a href="structserial__port_1_1_port_info.html#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="types_8h_source.html">types.h</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a44128a02a86463d9596abc822768ddbb"><td class="memItemLeft" align="right" valign="top"><a id="a44128a02a86463d9596abc822768ddbb" name="a44128a02a86463d9596abc822768ddbb"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>PortInfo</b> (const std::string &amp;long_name, const std::string &amp;short_name)</td></tr>
+<tr class="memitem:a90d97d00dad73b6649fb444c97ac7bff"><td class="memItemLeft" align="right" valign="top"><a id="a90d97d00dad73b6649fb444c97ac7bff" name="a90d97d00dad73b6649fb444c97ac7bff"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>PortInfo</b> ()=default</td></tr>
+<tr class="memdesc:a90d97d00dad73b6649fb444c97ac7bff"><td class="mdescLeft">&#160;</td><td class="mdescRight">Default constructor. <br /></td></tr>
+<tr class="separator:a90d97d00dad73b6649fb444c97ac7bff"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a44128a02a86463d9596abc822768ddbb"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structserial__port_1_1_port_info.html#a44128a02a86463d9596abc822768ddbb">PortInfo</a> (const std::string &amp;<a class="el" href="structserial__port_1_1_port_info.html#ab03871b8fc93ccc77feb8d5d86e59822">long_name</a>, const std::string &amp;<a class="el" href="structserial__port_1_1_port_info.html#a80adeabfec68cbf6962e67977844a6d4">short_name</a>)</td></tr>
+<tr class="memdesc:a44128a02a86463d9596abc822768ddbb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor initializing info.  <a href="structserial__port_1_1_port_info.html#a44128a02a86463d9596abc822768ddbb">More...</a><br /></td></tr>
 <tr class="separator:a44128a02a86463d9596abc822768ddbb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
 <tr class="memitem:ab03871b8fc93ccc77feb8d5d86e59822"><td class="memItemLeft" align="right" valign="top"><a id="ab03871b8fc93ccc77feb8d5d86e59822" name="ab03871b8fc93ccc77feb8d5d86e59822"></a>
 std::string&#160;</td><td class="memItemRight" valign="bottom"><b>long_name</b></td></tr>
+<tr class="memdesc:ab03871b8fc93ccc77feb8d5d86e59822"><td class="mdescLeft">&#160;</td><td class="mdescRight">The long name of the port (same as short name on Linux) <br /></td></tr>
 <tr class="separator:ab03871b8fc93ccc77feb8d5d86e59822"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a80adeabfec68cbf6962e67977844a6d4"><td class="memItemLeft" align="right" valign="top"><a id="a80adeabfec68cbf6962e67977844a6d4" name="a80adeabfec68cbf6962e67977844a6d4"></a>
 std::string&#160;</td><td class="memItemRight" valign="bottom"><b>short_name</b></td></tr>
+<tr class="memdesc:a80adeabfec68cbf6962e67977844a6d4"><td class="mdescLeft">&#160;</td><td class="mdescRight">short_name Short name of the port (e.g. "COM1" or "/dev/ttyS0") <br /></td></tr>
 <tr class="separator:a80adeabfec68cbf6962e67977844a6d4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="friends" name="friends"></a>
 Friends</h2></td></tr>
 <tr class="memitem:aab3c2c33d1e024aadc95ae7f4a45d993"><td class="memItemLeft" align="right" valign="top"><a id="aab3c2c33d1e024aadc95ae7f4a45d993" name="aab3c2c33d1e024aadc95ae7f4a45d993"></a>
 std::ostream &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>operator&lt;&lt;</b> (std::ostream &amp;os, const <a class="el" href="structserial__port_1_1_port_info.html">PortInfo</a> &amp;obj)</td></tr>
+<tr class="memdesc:aab3c2c33d1e024aadc95ae7f4a45d993"><td class="mdescLeft">&#160;</td><td class="mdescRight">Overloaded stream output operator to display port information. <br /></td></tr>
 <tr class="separator:aab3c2c33d1e024aadc95ae7f4a45d993"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a54b8c70013f42cc370f5341fecce41d1"><td class="memItemLeft" align="right" valign="top"><a id="a54b8c70013f42cc370f5341fecce41d1" name="a54b8c70013f42cc370f5341fecce41d1"></a>
 bool&#160;</td><td class="memItemRight" valign="bottom"><b>operator&lt;</b> (const <a class="el" href="structserial__port_1_1_port_info.html">PortInfo</a> &amp;lhs, const <a class="el" href="structserial__port_1_1_port_info.html">PortInfo</a> &amp;rhs)</td></tr>
+<tr class="memdesc:a54b8c70013f42cc370f5341fecce41d1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Overloaded relational operators that allow sorting <a class="el" href="structserial__port_1_1_port_info.html" title="Holds information about a port.">PortInfo</a> objects by their short name. <br /></td></tr>
 <tr class="separator:a54b8c70013f42cc370f5341fecce41d1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5cccc6a032dd27c295746464ec6c220f"><td class="memItemLeft" align="right" valign="top"><a id="a5cccc6a032dd27c295746464ec6c220f" name="a5cccc6a032dd27c295746464ec6c220f"></a>
 bool&#160;</td><td class="memItemRight" valign="bottom"><b>operator&lt;=</b> (const <a class="el" href="structserial__port_1_1_port_info.html">PortInfo</a> &amp;lhs, const <a class="el" href="structserial__port_1_1_port_info.html">PortInfo</a> &amp;rhs)</td></tr>
@@ -109,6 +122,54 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>operator&gt;</b> (con
 bool&#160;</td><td class="memItemRight" valign="bottom"><b>operator&gt;=</b> (const <a class="el" href="structserial__port_1_1_port_info.html">PortInfo</a> &amp;lhs, const <a class="el" href="structserial__port_1_1_port_info.html">PortInfo</a> &amp;rhs)</td></tr>
 <tr class="separator:a835222a19c259e2f0f23f8b4f555d1dd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p >Holds information about a port. </p>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="a44128a02a86463d9596abc822768ddbb" name="a44128a02a86463d9596abc822768ddbb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a44128a02a86463d9596abc822768ddbb">&#9670;&nbsp;</a></span>PortInfo()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">serial_port::PortInfo::PortInfo </td>
+          <td>(</td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>long_name</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>short_name</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Constructor initializing info. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">long_name</td><td>Long name of the port (same as short name on Linux) </td></tr>
+    <tr><td class="paramname">short_name</td><td>Short name of the port (e.g. "COM1" or "/dev/ttyS0") </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <hr/>The documentation for this struct was generated from the following file:<ul>
 <li>include/serial_port/<a class="el" href="types_8h_source.html">types.h</a></li>
 </ul>

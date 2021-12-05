@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['getsettings_0',['GetSettings',['../classserial__port_1_1_serial_port.html#a768ec4adea930a7c9364e340ed09c880',1,'serial_port::SerialPort']]]
+  ['flushbuffer_0',['FlushBuffer',['../classserial__port_1_1_serial_port.html#af6777399408bf4b0f22ea41c2c838678',1,'serial_port::SerialPort']]]
 ];
