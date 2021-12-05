@@ -14,17 +14,25 @@ constexpr auto kDefaultName = "COM1";
 
 namespace serial_port
 {
+	/// @brief Parity modes
 	enum class Parity { kNone, kOdd, kEven };
+	/// @brief Number of stop bits used
 	enum class NumStopBits { kOne, kTwo };
 
+	/// @brief Holds information about a port
 	struct PortInfo
 	{
+		/// @brief Default constructor
 		PortInfo() = default;
+		/// @brief Constructor initializing info
+		/// @param long_name Long name of the port (same as short name on Linux)
+		/// @param short_name Short name of the port (e.g. "COM1" or "/dev/ttyS0")
 		PortInfo(const std::string& long_name, const std::string& short_name) : long_name(long_name), short_name(short_name) {}
-
+		/// @brief The long name of the port (same as short name on Linux)
 		std::string long_name;
+		/// @brief short_name Short name of the port (e.g. "COM1" or "/dev/ttyS0")
 		std::string short_name;
-
+		/// @brief Overloaded stream output operator to display port information 
 		friend std::ostream& operator<<(std::ostream& os, const PortInfo& obj)
 		{
 			return os
@@ -34,30 +42,47 @@ namespace serial_port
 				<< "Short name: " << obj.short_name;
 		}
 
-		// Port info should be sorted by short name, so define the relations that way
+		/// @brief Overloaded relational operators that allow sorting PortInfo objects by their short name
 		friend bool operator<(const PortInfo& lhs, const PortInfo& rhs) { return lhs.short_name < rhs.short_name; }
 		friend bool operator<=(const PortInfo& lhs, const PortInfo& rhs) { return !(rhs < lhs); }
 		friend bool operator>(const PortInfo& lhs, const PortInfo& rhs) { return rhs < lhs; }
 		friend bool operator>=(const PortInfo& lhs, const PortInfo& rhs) { return !(lhs < rhs); }
 	};
 
+	/// @brief Describes the settings of a port 
 	struct Settings
 	{
+		/// @brief Default constructor
 		Settings() = default;
+		/// @brief Constructor initializing the settings
+		/// @param port_name Name of the port
+		/// @param baud_rate Baud rate
+		/// @param parity Parity used
+		/// @param num_stop_bits Number of stop bits
+		/// @param hardware_flow_control Hardware flow control (on or off)
+		/// @param timeout_s Timeout in seconds
+		/// @param timeout_ms Timeout in milliseconds
 		Settings(const std::string& port_name, const int baud_rate, const Parity parity, const NumStopBits num_stop_bits,
 		         const bool hardware_flow_control, const unsigned long timeout_s, const unsigned long timeout_ms) :
 			port_name(port_name), baud_rate(baud_rate), parity(parity), num_stop_bits(num_stop_bits),
 			hardware_flow_control(hardware_flow_control), timeout_s(timeout_s), timeout_ms(timeout_ms)
 		{
 		}
+		/// @brief Name of the port
 		std::string port_name{ kDefaultName };
+		/// @brief Baud rate
 		int baud_rate{ 9600 };
+		/// @brief Parity
 		Parity parity{ Parity::kNone };
+		/// @brief Number of stop bits
 		NumStopBits num_stop_bits{ NumStopBits::kOne };
+		/// @brief Hardware flow control
 		bool hardware_flow_control{ false };
+		/// @brief Timeout in seconds
 		unsigned long timeout_s{ 0 };
+		/// @brief Timeout in milliseconds
 		unsigned long timeout_ms{ 0 };
-
+		/// @brief Overloaded equality operator
 		friend bool operator==(const Settings& lhs, const Settings& rhs)
 		{
 			return lhs.port_name == rhs.port_name
@@ -68,12 +93,12 @@ namespace serial_port
 				&& lhs.timeout_s == rhs.timeout_s
 				&& lhs.timeout_ms == rhs.timeout_ms;
 		}
-
+		/// @brief Overloaded inequality operator
 		friend bool operator!=(const Settings& lhs, const Settings& rhs)
 		{
 			return !(lhs == rhs);
 		}
-
+		/// @brief Overloaded stream output operator
 		friend std::ostream& operator<<(std::ostream& os, const Settings& obj)
 		{
 			std::string parity_string;
@@ -100,7 +125,7 @@ namespace serial_port
 		}
 	};
 
-	// Exceptions
+	/// @brief An exception that is thrown when input or output operations go wrong
 	using IoException = std::runtime_error;
 }
 #endif // TYPES_H

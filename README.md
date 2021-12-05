@@ -35,7 +35,7 @@ cmake --build . --config Release
 ## Getting started
 To use the `SerialPort` in your own project, add the folder `SerialPort/include` to your include directories and link against `SerialPort/lib/Release/SerialPort.lib` on Windows or `SerialPort/lib/Release/libSerialPort.a` on Linux.
 
-The class interface is currently undocumented but hopefully self-explanatory. Here is a minimal example to get you started:
+Here is a minimal example to get you started:
 
 ```cpp
 #include <chrono>
@@ -74,3 +74,5 @@ int main()
 } // Ports are closed automatically in their destructor
 
 ```
+
+For more details, check out the [documentation](https://nullpunkttud.github.io/SerialPort/).
