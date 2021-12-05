@@ -354,3 +354,4 @@ MigrationBackup/
 # Doc folder
 /doc/html
 /doc/latex
+/docs/docs
