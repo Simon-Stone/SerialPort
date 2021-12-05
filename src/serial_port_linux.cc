@@ -116,6 +116,11 @@ namespace
 
 void serial_port::SerialPortLinux::Open()
 {
+    if(this->IsOpen())
+    {
+        this->Close();
+    }
+
 	handle_ = open(settings_.port_name.c_str(), O_RDWR);
 
 	if (handle_ < 0)
