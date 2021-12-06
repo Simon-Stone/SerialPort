@@ -17,17 +17,7 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
-    
-    - name: Install socat
-      # Installs socat to fake some serial ports
-      run: sudo apt install socat
-    
-    - name: Setup virtual serial ports
-      run: sudo bash ./test/setup_virtual_ports.sh
-      
-    - name: Echo serial port names
-      run: ls -l
-    
+        
     - name: Configure CMake
       # Configure CMake in a 'build' subdirectory. `CMAKE_BUILD_TYPE` is only required if you are using a single-configuration generator such as make.
       # See https://cmake.org/cmake/help/latest/variable/CMAKE_BUILD_TYPE.html?highlight=cmake_build_type
@@ -36,12 +26,17 @@ jobs:
     - name: Build
       # Build your program with the given configuration
       run: cmake --build ${{github.workspace}}/build --config ${{env.BUILD_TYPE}}
-
+      
+    - name: Install socat
+      # Installs socat to fake some serial ports
+      run: sudo apt install socat
+      
     - name: Test
       working-directory: ${{github.workspace}}/build
       # Execute tests defined by the CMake configuration.  
       # See https://cmake.org/cmake/help/latest/manual/ctest.1.html for more detail
       run: |
+        sudo bash ../test/setup_virtual_ports.sh
         ls -l
         ctest -C ${{env.BUILD_TYPE}} --verbose
     
