@@ -350,3 +350,8 @@ MigrationBackup/
 .ionide/
 /out
 /lib
+
+# Doc folder
+/doc/html
+/doc/latex
+/docs/docs
