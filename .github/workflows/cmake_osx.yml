@@ -23,7 +23,7 @@ jobs:
       run: brew install socat
     
     - name: Setup virtual serial ports
-      run: sudo ./test/setup_virtual_ports.sh
+      run: sudo bash ./test/setup_virtual_ports.sh
       
     - name: Echo serial port names
       run: ls -l
