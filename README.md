@@ -1,6 +1,8 @@
 # SerialPort
 A light-weight C++ library for cross-platform serial communication.
 
+![CMake Linux](https://github.com/github/docs/actions/workflows/cmake_linux.yml/badge.svg) 
+
 ## Build instructions
 The build instructions are the same for both Windows (tested on Windows 10) and Linux (tested on Ubuntu 20.04):
 
