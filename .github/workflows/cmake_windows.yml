@@ -1,4 +1,4 @@
-name: CMake_Linux
+name: CMake_Windows
 
 on:
   [push, pull_request]
