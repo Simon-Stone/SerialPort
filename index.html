@@ -68,17 +68,17 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 <div class="textblock"><p ><a class="anchor" id="md_README"></a>A light-weight C++ library for cross-platform serial communication.</p>
-<p ><img src="https://github.com/nullpunktTUD/SerialPort/actions/workflows/cmake_linux.yml/badge.svg" alt="CMake Linux" style="pointer-events: none;" class="inline"/> <img src="https://github.com/nullpunktTUD/SerialPort/actions/workflows/cmake_windows.yml/badge.svg" alt="CMake Windows" style="pointer-events: none;" class="inline"/></p>
+<p ><img src="https://github.com/nullpunktTUD/SerialPort/actions/workflows/cmake_linux.yml/badge.svg" alt="CMake Linux" style="pointer-events: none;" class="inline"/> <img src="https://github.com/nullpunktTUD/SerialPort/actions/workflows/cmake_osx.yml/badge.svg" alt="CMake OSX" style="pointer-events: none;" class="inline"/> <img src="https://github.com/nullpunktTUD/SerialPort/actions/workflows/cmake_windows.yml/badge.svg" alt="CMake Windows" style="pointer-events: none;" class="inline"/></p>
 <h1><a class="anchor" id="autotoc_md1"></a>
 Build instructions</h1>
-<p >The build instructions are the same for both Windows (tested on Windows 10) and Linux (tested on Ubuntu 20.04):</p>
+<p >The build instructions are the same for Windows (tested on Windows 10), Linux (tested on Ubuntu 20.04), and Mac OS X:</p>
 <ul>
 <li>Get the latet release of <a href="https://cmake.org/download/">CMake for your platform</a></li>
 <li>Create a folder <code>build</code> inside the cloned repository folder: <div class="fragment"><div class="line">mkdir build</div>
 </div><!-- fragment --></li>
 <li>Navigate to <code>build</code>: <div class="fragment"><div class="line">cd build</div>
 </div><!-- fragment --></li>
-<li>Configure the project and generate a build system: <div class="fragment"><div class="line">cmake ..</div>
+<li>Configure the project and generate a build system: <div class="fragment"><div class="line">cmake .. -DCMAKE_BUILD_TYPE=Release</div>
 </div><!-- fragment --></li>
 <li>Then perform the actual build (in Release mode): <div class="fragment"><div class="line">cmake --build . --config Release</div>
 </div><!-- fragment --></li>
@@ -87,11 +87,11 @@ Build instructions</h1>
 <div class="line">cd SerialPort</div>
 <div class="line">mkdir build</div>
 <div class="line">cd build</div>
-<div class="line">cmake ..</div>
+<div class="line">cmake .. -DCMAKE_BUILD_TYPE=Release</div>
 <div class="line">cmake --build . --config Release</div>
 </div><!-- fragment --><h1><a class="anchor" id="autotoc_md2"></a>
 Getting started</h1>
-<p >To use the <code>SerialPort</code> in your own project, add the folder <code>SerialPort/include</code> to your include directories and link against <code>SerialPort/lib/Release/SerialPort.lib</code> on Windows or <code>SerialPort/lib/Release/libSerialPort.a</code> on Linux.</p>
+<p >To use the <code>SerialPort</code> in your own project, add the folder <code>SerialPort/include</code> to your include directories and link against <code>SerialPort/lib/Release/SerialPort.lib</code> on Windows or <code>SerialPort/lib/Release/libSerialPort.a</code> on Linux and Mac.</p>
 <p >Here is a minimal example to get you started:</p>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;chrono&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;iostream&gt;</span></div>
