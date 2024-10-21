@@ -77,4 +77,4 @@ int main()
 
 ```
 
-For more details, check out the [documentation](https://nullpunkttud.github.io/SerialPort/).
+For more details, check out the [documentation](https://simon-stone.github.io/SerialPort/).
